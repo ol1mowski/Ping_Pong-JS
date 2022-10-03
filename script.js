@@ -17,9 +17,14 @@ const ch = canvas.height = 500;
 const ballSize = 20;
 
 //Pozycja X paletki
-const ballX = cw / 2 - ballSize / 2;
+let ballX = cw / 2 - ballSize / 2;
 //Pozycja Y paletki
-const ballY = ch / 2 - ballSize / 2;
+let ballY = ch / 2 - ballSize / 2;
+
+//Prędkość piłki
+
+let ballSpeedX = 1;
+let ballSpeedY = 1;
 
 //Wymiary paletek
 
@@ -33,14 +38,14 @@ const paddleHeight = 100;
 //Pozycja X paletki
 const playerX = 70;
 //Pozycja Y paletki
-const playerY = 200;
+let playerY = 200;
 
 //Odległości od konća pola gry bota
 
 //Pozycja X paletki
 const aiX = 710;
 //Pozycja Y paletki
-const aiY = 200;
+let aiY = 200;
 
 //Wymiary lini połowy boiska
 
@@ -72,6 +77,9 @@ let ball = () => {
     ctx.fillStyle = '#fff';
     //Rysowanie obiektu
     ctx.fillRect(ballX, ballY, ballSize, ballSize);
+    //animacja
+    ballX += ballSpeedX;
+    ballY += ballSpeedY;
 };
 
 //funkcja rysująca pole gry
@@ -91,7 +99,11 @@ let table = () => {
 };
 
 //Wywołania funkcji
-table();
-ball();
-paddle();
-AI();
+let game = () => {
+    table();
+    ball();
+    paddle();
+    AI();
+};
+
+setInterval(game, 1000 / 60);
