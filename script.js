@@ -23,8 +23,8 @@ let ballY = ch / 2 - ballSize / 2;
 
 //Prędkość piłki
 
-let ballSpeedX = 1;
-let ballSpeedY = 1;
+let ballSpeedX = 5;
+let ballSpeedY = 5;
 
 //Wymiary paletek
 
@@ -80,6 +80,14 @@ let ball = () => {
     //animacja
     ballX += ballSpeedX;
     ballY += ballSpeedY;
+
+    if (ballY <= 0 || ballY + ballSize >= ch) {
+        ballSpeedY = -ballSpeedY;
+    }
+
+    if (ballX <= 0 || ballX + ballSize >= cw) {
+        ballSpeedX = -ballSpeedX;
+    }
 };
 
 //funkcja rysująca pole gry
