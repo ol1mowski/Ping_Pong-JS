@@ -71,6 +71,40 @@ let paddle = () => {
     ctx.fillRect(playerX, playerY, paddleWidth, paddleHeight);
 };
 
+
+//Sprawdza pozycję myszy i kontroluje czy paletka nie wyszła poza canvas
+let playerPosition = (e) => {
+    console.log("pozycja myszy to: " + (e.clientY - topCanvas));
+    playerY = e.clientY - topCanvas - paddleHeight / 2; //żeby była myszka na środku
+      //gdy próbuje wyjachać rakietka na dole poza canvas
+    if (playerY >= ch - paddleHeight) {
+        playerY = ch - paddleHeight
+    }
+      //gdy próbuje wyjachać rakietka na górze poza canvas
+    if (playerY <= 0) {
+        playerY = 0;
+    }
+    };   
+
+canvas.addEventListener('mousemove', playerPosition);
+
+let topCanvas = canvas.offsetTop; // na jakiej wysokości zaczyna sie canvas
+
+//Funkcja zwiekszająca predkość piłki
+let speedUp = () => {
+    if (ballSpeedX > 0) {
+        ballSpeedX += .2;
+  
+    } else if (ballSpeedX < 0) {
+        ballSpeedX -= .2;
+    }
+  
+    if (ballSpeedY > 0) {
+        ballSpeedY += .2;
+    } else {
+        ballSpeedY -= .2;
+    }
+};
 //funkcja rysująca piłkę
 let ball = () => {
     //Kolor obiektu
@@ -81,12 +115,14 @@ let ball = () => {
     ballX += ballSpeedX;
     ballY += ballSpeedY;
 
+    //Obsługa odbicia piłki oraz dodanie prędkości
     if (ballY <= 0 || ballY + ballSize >= ch) {
         ballSpeedY = -ballSpeedY;
+        speedUp();
     }
-
     if (ballX <= 0 || ballX + ballSize >= cw) {
         ballSpeedX = -ballSpeedX;
+        speedUp();
     }
 };
 
