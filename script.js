@@ -88,6 +88,26 @@ let playerPosition = (event) => {
 
 canvas.addEventListener('mousemove', playerPosition);
 
+//funkcja obsługująca przyśpieszanie piłki
+let speedUp = () => {
+    //sprawdza czy piłka odije się od krawędzi i zwiększy bądz zmniejszy o 0.4
+    if (ballSpeedX > 0 && ballSpeedX <= 16) {
+        ballSpeedX += .4;
+    } 
+    
+    else if (ballSpeedX < 0 && ballSpeedX >= -16) {
+        ballSpeedX -= .4
+    }
+
+    if (ballSpeedY > 0 && ballSpeedY <= 16) {
+        ballSpeedY += .4;
+    }
+    
+    else if (ballSpeedY < 0 && ballSpeedY >= -16) {
+        ballSpeedY -= .4
+    }
+};
+
 //funkcja rysująca piłkę
 let ball = () => {
     //Kolor obiektu
@@ -101,9 +121,11 @@ let ball = () => {
     //Obsługa odbicia piłki oraz dodanie prędkości
     if (ballY <= 0 || ballY + ballSize >= ch) {
         ballSpeedY = -ballSpeedY;
+        speedUp();
     }
     if (ballX <= 0 || ballX + ballSize >= cw) {
         ballSpeedX = -ballSpeedX;
+        speedUp();
     }
 };
 
