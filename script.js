@@ -84,6 +84,7 @@ let playerPosition = (event) => {
     if (playerY <= 0) {
         playerY = 0;
     }
+    aiY = playerY;
     };   
 
 canvas.addEventListener('mousemove', playerPosition);
