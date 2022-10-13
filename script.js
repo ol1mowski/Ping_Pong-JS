@@ -54,7 +54,41 @@ const lineWidth = 3;
 //Wysokość
 const lineHight = 13;
 
+//Poruszanie się AI
+let aiPosition = () => {
 
+    const middlePaddel = aiY + paddleHeight / 2 ;
+    const middleBall = ballY + ballSize / 2;
+    
+    if (ballX > 500) {
+        if (middlePaddel - middleBall > 200) {
+            aiY -= 24;
+        } else if (middlePaddel - middleBall > 50) {
+            aiY -= 10;
+        }
+        else if (middlePaddel - middleBall < -200) {
+            aiY += 24;
+      } else if (middlePaddel - middleBall < -50) {
+            aiY += 10;
+      }
+    }
+    if (ballX <= 500 && ballX > 100) {
+      if (middlePaddel - middleBall > 100) {
+        aiY -= 3;
+      } 
+        if (middlePaddel - middleBall < -100) {
+        aiY += 3;
+      }
+    }
+//Sprawdzenie czy pozycja AI nie wychodzi za pole canvas
+    if (aiY >= ch - paddleHeight) {
+        aiY = ch - paddleHeight
+    }
+
+    if (aiY <= 0) {
+        aiY = 0;
+    }
+};
 //funkcja rysująca bota
 let AI = () => {
     //Kolor obiektu
@@ -84,7 +118,6 @@ let playerPosition = (event) => {
     if (playerY <= 0) {
         playerY = 0;
     }
-    aiY = playerY;
     };   
 
 canvas.addEventListener('mousemove', playerPosition);
@@ -152,6 +185,7 @@ let game = () => {
     ball();
     paddle();
     AI();
+    aiPosition();
 };
 
 setInterval(game, 1000 / 60);   
