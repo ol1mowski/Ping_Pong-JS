@@ -56,7 +56,7 @@ const lineHight = 13;
 
 //Poruszanie się AI
 let aiPosition = () => {
-
+    //Zmienne przechowujące środek paletki AI i piłki
     const middlePaddel = aiY + paddleHeight / 2 ;
     const middleBall = ballY + ballSize / 2;
     
