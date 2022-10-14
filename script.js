@@ -157,10 +157,18 @@ let ball = () => {
         ballSpeedY = -ballSpeedY;
         speedUp();
     }
-    if (ballX <= 0 || ballX + ballSize >= cw) {
-        ballSpeedX = -ballSpeedX;
-        speedUp();
-    }
+
+    if (ballX + ballSize >= cw) {
+        ballX = cw / 2 - ballSize / 2;
+        ballY = ch / 2 - ballSize / 2;
+        ballSpeedX = 5;
+        ballSpeedY = 5;
+        if (ballX > 0) {
+            console.log('AI')
+        } else {
+            console.log('PLAyRE')
+        }
+    } 
 };
 
 //funkcja rysująca pole gry
