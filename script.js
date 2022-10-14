@@ -157,17 +157,24 @@ let ball = () => {
         ballSpeedY = -ballSpeedY;
         speedUp();
     }
-
+    let turn = '';
+    if (ballX > 0) {
+        console.log('AI')
+        turn = 'p';
+    } else {
+        console.log('PLAyRE')
+        turn = 'a';
+    }
     if (ballX + ballSize >= cw) {
         ballX = cw / 2 - ballSize / 2;
         ballY = ch / 2 - ballSize / 2;
-        ballSpeedX = 5;
-        ballSpeedY = 5;
-        if (ballX > 0) {
-            console.log('AI')
-        } else {
-            console.log('PLAyRE')
-        }
+        if (turn == 'p') {
+            ballSpeedX = -5;
+            ballSpeedY = -5;
+        } else if (turn == 'a') {
+            ballSpeedX = 5;
+            ballSpeedY = 5;
+        }   
     } 
 };
 
